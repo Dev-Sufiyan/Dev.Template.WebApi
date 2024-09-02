@@ -55,4 +55,4 @@ jobs:
           app-name: 'Genie-Counter-WebApi'
           slot-name: 'Production'
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_9940C4DFF22A4A4697885ACA63DBF9E4 }}
-          package: ${{env.DOTNET_ROOT}}/myapp
+          package: .
