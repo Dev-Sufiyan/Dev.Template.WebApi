@@ -11,6 +11,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Genie.Counter.Migrations.SqlServer\Genie.Counter.Migrations.SqlServer.csproj" />
     <ProjectReference Include="..\Genie.Counter.Repository\Genie.Counter.Repository.csproj" />
     <ProjectReference Include="..\Genie.Counter.DBContext\Genie.Counter.DBContext.csproj" />
     <ProjectReference Include="..\Genie.Counter.Model\Genie.Counter.Model.csproj" />

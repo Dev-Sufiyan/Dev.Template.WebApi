@@ -5,19 +5,16 @@ using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Register DbContext with SQL Server
 builder.Services.AddDbContext<AppDbContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("ConnectionString")));
+    options.UseSqlServer(builder.Configuration["ConnectionString:SqlServer"],
+                         x =>
+                         {
+                             x.MigrationsAssembly("Genie.Counter.Migrations.SqlServer");
+                         }));
 
-// Register the generic repository
+var temp = builder.Configuration["ConnectionString:SqlServer"];
 builder.Services.AddScoped(typeof(IRepositoryBase<>), typeof(RepositoryBase<>));
 
-// Register any other services
-// Add any additional services you need here
-// For example:
-// builder.Services.AddScoped<ISomeService, SomeService>();
-
-// Add controllers and configure Swagger
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(c =>
@@ -27,7 +24,6 @@ builder.Services.AddSwaggerGen(c =>
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline
 if (app.Environment.IsDevelopment())
 {
     app.UseDeveloperExceptionPage();

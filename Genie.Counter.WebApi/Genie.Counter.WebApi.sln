@@ -11,6 +11,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Genie.Counter.Model", "..\G
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Genie.Counter.Repository", "..\Genie.Counter.Repository\Genie.Counter.Repository.csproj", "{2F61A8C6-F931-42BF-B1A7-DEAE71EBB0CD}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Genie.Counter.Migrations.SqlServer", "..\Genie.Counter.Migrations.SqlServer\Genie.Counter.Migrations.SqlServer.csproj", "{1805536B-308B-4C2C-8B03-4A6550C62732}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{2F61A8C6-F931-42BF-B1A7-DEAE71EBB0CD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2F61A8C6-F931-42BF-B1A7-DEAE71EBB0CD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2F61A8C6-F931-42BF-B1A7-DEAE71EBB0CD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1805536B-308B-4C2C-8B03-4A6550C62732}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1805536B-308B-4C2C-8B03-4A6550C62732}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1805536B-308B-4C2C-8B03-4A6550C62732}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1805536B-308B-4C2C-8B03-4A6550C62732}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
