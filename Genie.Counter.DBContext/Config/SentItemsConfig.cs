@@ -8,7 +8,7 @@ public class SentItemsConfig : IEntityTypeConfiguration<SentItems>
 {
     public void Configure(EntityTypeBuilder<SentItems> builder)
     {
-        builder.HasKey(x => new { x.ProfileId, x.TimeStamp }); // Composite Key or use appropriate primary key configuration
+        builder.HasKey(x => new { x.ProfileId, x.TimeStamp });
         builder.Property(x => x.TimeStamp).IsRequired();
         builder.Property(x => x.Count).IsRequired();
 

@@ -8,10 +8,10 @@ public class UserProfileConfig : IEntityTypeConfiguration<UserProfile>
 {
     public void Configure(EntityTypeBuilder<UserProfile> builder)
     {
-        builder.HasKey(x => x.Id);
+        builder.HasKey(x => x.UserId);
         builder.Property(x => x.Name).HasMaxLength(100);
         builder.HasIndex(x => x.MobileNo).IsUnique();
     }
 }
-
+    
 

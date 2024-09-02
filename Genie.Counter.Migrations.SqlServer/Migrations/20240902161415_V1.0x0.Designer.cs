@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Genie.Counter.Migrations.SqlServer.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20240902153601_V1.0x0")]
+    [Migration("20240902161415_V1.0x0")]
     partial class V10x0
     {
         /// <inheritdoc />
@@ -27,16 +27,16 @@ namespace Genie.Counter.Migrations.SqlServer.Migrations
 
             modelBuilder.Entity("Genie.Counter.Model.Entity.Count", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("CounterId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CounterId"));
 
                     b.Property<int>("TotalCount")
                         .HasColumnType("int");
 
-                    b.HasKey("Id");
+                    b.HasKey("CounterId");
 
                     b.ToTable("Count");
                 });
@@ -59,11 +59,11 @@ namespace Genie.Counter.Migrations.SqlServer.Migrations
 
             modelBuilder.Entity("Genie.Counter.Model.Entity.UserProfile", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("UserId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("UserId"));
 
                     b.Property<int>("MobileNo")
                         .HasColumnType("int");
@@ -73,7 +73,7 @@ namespace Genie.Counter.Migrations.SqlServer.Migrations
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
-                    b.HasKey("Id");
+                    b.HasKey("UserId");
 
                     b.HasIndex("MobileNo")
                         .IsUnique();

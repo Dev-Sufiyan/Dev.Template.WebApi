@@ -9,7 +9,7 @@ public class CountConfig : IEntityTypeConfiguration<Count>
     public required DbSet<Count> Counts { get; set; }
     public void Configure(EntityTypeBuilder<Count> builder)
     {
-        builder.HasKey(x => x.Id);
+        builder.HasKey(x => x.CounterId);
     }
 }
 

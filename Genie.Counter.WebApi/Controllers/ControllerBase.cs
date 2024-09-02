@@ -15,7 +15,7 @@ public abstract class BaseController<T> : ControllerBase where T : class
 
 
     [HttpGet(nameof(GetFilteredAsync))]
-    public async Task<IActionResult> GetFilteredAsync([FromQuery] Dictionary<string, object> filters)
+    public async Task<IActionResult> GetFilteredAsync([FromQuery] Dictionary<string, string> filters)
     {
         var entities = await _repository.GetFilteredAsync(filters);
         return Ok(entities);

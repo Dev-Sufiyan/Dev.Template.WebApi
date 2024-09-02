@@ -15,27 +15,27 @@ namespace Genie.Counter.Migrations.SqlServer.Migrations
                 name: "Count",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
+                    CounterId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     TotalCount = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Count", x => x.Id);
+                    table.PrimaryKey("PK_Count", x => x.CounterId);
                 });
 
             migrationBuilder.CreateTable(
                 name: "UserProfile",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
+                    UserId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
                     MobileNo = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_UserProfile", x => x.Id);
+                    table.PrimaryKey("PK_UserProfile", x => x.UserId);
                 });
 
             migrationBuilder.CreateTable(
@@ -53,7 +53,7 @@ namespace Genie.Counter.Migrations.SqlServer.Migrations
                         name: "FK_SentItems_UserProfile_ProfileId",
                         column: x => x.ProfileId,
                         principalTable: "UserProfile",
-                        principalColumn: "Id",
+                        principalColumn: "UserId",
                         onDelete: ReferentialAction.Cascade);
                 });
 
