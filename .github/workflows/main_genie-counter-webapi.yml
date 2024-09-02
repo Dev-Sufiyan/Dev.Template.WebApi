@@ -33,7 +33,7 @@ jobs:
           dotnet publish -c Release -o ${{env.DOTNET_ROOT}}/myapp
       
       - name: Apply EF migrations
-        run: dotnet ef database update --project .\Genie.Counter.Migrations.SqlServer
+        run: dotnet ef database update --project .\Genie.Counter.Migrations.SqlServer --startup-project .\Genie.Counter.WebApi
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v3
