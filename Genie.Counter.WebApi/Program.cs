@@ -1,4 +1,5 @@
 using Genie.Counter.DBContext;
+using Genie.Counter.Model.Entity;
 using Genie.Counter.Repository;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
@@ -15,6 +16,7 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 
 // Add repository services
 builder.Services.AddScoped(typeof(IRepositoryBase<>), typeof(RepositoryBase<>));
+builder.Services.AddScoped<ICountHistoryRepository, CountHistoryRepository>();
 
 // Add controllers
 builder.Services.AddControllers();

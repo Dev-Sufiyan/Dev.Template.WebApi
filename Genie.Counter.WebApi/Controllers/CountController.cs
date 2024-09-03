@@ -11,8 +11,10 @@ namespace Genie.Counter.WebApi
     [Route("api/[controller]")]
     public class CountController : BaseController<Count>
     {
-        public CountController(IRepositoryBase<Count> repository) : base(repository)
+        ICountHistoryRepository CountHistoryRepository;
+        public CountController(IRepositoryBase<Count> repository, ICountHistoryRepository CountHistoryRepository) : base(repository)
         {
+            this.CountHistoryRepository = CountHistoryRepository;
         }
 
         // GET api/count
@@ -50,7 +52,7 @@ namespace Genie.Counter.WebApi
 
             // Update the entity in the repository
             await _repository.UpdateAsync(entity);
-
+            await CountHistoryRepository.AddAsync(new() { Count = num });
             // Return the updated entity
             return Ok(new { totalCount = entity.TotalCount });
         }
