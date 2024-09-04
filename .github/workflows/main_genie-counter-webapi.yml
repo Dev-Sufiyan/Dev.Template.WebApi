@@ -33,6 +33,8 @@ jobs:
           dotnet publish -c Release -o ${{env.DOTNET_ROOT}}/myapp
       
       - name: Apply EF migrations
+        env:
+          ASPNETCORE_ENVIRONMENT: Production
         run: dotnet ef database update --project .\Genie.Counter.Migrations.SqlServer --startup-project .\Genie.Counter.WebApi
 
       - name: Upload artifact for deployment job
