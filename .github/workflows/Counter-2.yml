@@ -1,0 +1,75 @@
+
+name: Build and deploy ASP.Net Core app to Azure Web App - Counter-2
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up .NET Core
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '8.x'
+
+      - name: Install dotnet-ef tool
+        run: dotnet tool install --global dotnet-ef
+
+      - name: Build with dotnet
+        run: |
+          cd Genie.Counter.WebApi
+          dotnet build --configuration Release
+
+      - name: dotnet publish
+        run: |
+          cd Genie.Counter.WebApi
+          dotnet publish -c Release -o ${{env.DOTNET_ROOT}}/myapp
+
+      - name: Apply EF migrations
+        env:
+          ASPNETCORE_ENVIRONMENT: Production
+        run: dotnet ef database update --project .\Genie.Counter.Migrations.SqlServer --startup-project .\Genie.Counter.WebApi
+
+      - name: Upload artifact for deployment job
+        uses: actions/upload-artifact@v4
+        with:
+          name: .net-app
+          path: ${{env.DOTNET_ROOT}}/myapp
+
+  deploy:
+    runs-on: windows-latest
+    needs: build
+    environment:
+      name: 'production'
+      url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
+    permissions:
+      id-token: write #This is required for requesting the JWT
+
+    steps:
+      - name: Download artifact from build job
+        uses: actions/download-artifact@v4
+        with:
+          name: .net-app
+      
+      - name: Login to Azure
+        uses: azure/login@v2
+        with:
+          client-id: ${{ secrets.__clientidsecretname__ }}
+          tenant-id: ${{ secrets.__tenantidsecretname__ }}
+          subscription-id: ${{ secrets.__subscriptionidsecretname__ }}
+
+      - name: Deploy to Azure Web App
+        id: deploy-to-webapp
+        uses: azure/webapps-deploy@v3
+        with:
+          app-name: 'Counter-2'
+          slot-name: 'production'
+          package: .
+          
