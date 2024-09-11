@@ -23,13 +23,11 @@ jobs:
 
       - name: Build with dotnet
         run: |
-          cd Genie.Counter.WebApi
-          dotnet build --configuration Release
-
+          dotnet build Genie.Counter.WebApi/Genie.Counter.WebApi.csproj --configuration Release
+          
       - name: dotnet publish
         run: |
-          cd Genie.Counter.WebApi
-          dotnet publish -c Release -o ${{env.DOTNET_ROOT}}/myapp
+          dotnet publish Genie.Counter.WebApi/Genie.Counter.WebApi.csproj -c Release -o "${{env.DOTNET_ROOT}}/myapp"
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v4
