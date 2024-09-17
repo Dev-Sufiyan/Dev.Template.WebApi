@@ -28,40 +28,31 @@ jobs:
       - name: dotnet publish
         run: |
           dotnet publish Genie.Counter.WebApi/Genie.Counter.WebApi.csproj -c Release -o "${{env.DOTNET_ROOT}}/myapp"
-
+          
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v4
         with:
           name: .net-app
-          path: ${{env.DOTNET_ROOT}}/myapp
+          path: "${{env.DOTNET_ROOT}}/myapp"
 
   deploy:
     runs-on: windows-latest
     needs: build
     environment:
-      name: 'Production'
+      name: 'production'
       url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
-    permissions:
-      id-token: write #This is required for requesting the JWT
-
+    
     steps:
       - name: Download artifact from build job
         uses: actions/download-artifact@v4
         with:
           name: .net-app
       
-      - name: Login to Azure
-        uses: azure/login@v2
-        with:
-          client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_D682104C225242CC8ECEF264F4BA0AE5 }}
-          tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_FAC40DEB81BF4FAA82499B5F2956D3C9 }}
-          subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_49BF61E5A3894F2DA2A395F3B55F3A7F }}
-
       - name: Deploy to Azure Web App
         id: deploy-to-webapp
         uses: azure/webapps-deploy@v3
         with:
           app-name: 'Counter-2'
-          slot-name: 'Production'
+          slot-name: 'production'
           package: .
-          
+          publish-profile: ${{ secrets.AzureAppService_PublishProfile_7364dbe48ff448329a65eaec63658f6b }}

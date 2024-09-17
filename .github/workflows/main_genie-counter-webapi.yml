@@ -1,10 +1,10 @@
 name: Build and deploy to Azure Web App
 
-# on:
-#   push:
-#     branches:
-#       - main
-#   workflow_dispatch:
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
 
 jobs:
   build:
@@ -32,10 +32,10 @@ jobs:
           cd Dev.Template.WebApi
           dotnet publish -c Release -o ${{env.DOTNET_ROOT}}/myapp
       
-      - name: Apply EF migrations
-        env:
-          ASPNETCORE_ENVIRONMENT: Production
-        run: dotnet ef database update --project .\Dev.Template.Migrations.SqlServer --startup-project .\Dev.Template.WebApi
+      # - name: Apply EF migrations
+      #   env:
+      #     ASPNETCORE_ENVIRONMENT: Production
+      #   run: dotnet ef database update --project .\Dev.Template.Migrations.SqlServer --startup-project .\Dev.Template.WebApi
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v3
@@ -43,24 +43,24 @@ jobs:
           name: .net-app
           path: ${{env.DOTNET_ROOT}}/myapp
 
-  deploy:
-    runs-on: windows-latest
-    needs: build
-    environment:
-      name: 'Production'
-      url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
+  # deploy:
+  #   runs-on: windows-latest
+  #   needs: build
+  #   environment:
+  #     name: 'Production'
+  #     url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
 
-    steps:
-      - name: Download artifact from build job
-        uses: actions/download-artifact@v3
-        with:
-          name: .net-app
+  #   steps:
+  #     - name: Download artifact from build job
+  #       uses: actions/download-artifact@v3
+  #       with:
+  #         name: .net-app
 
-      - name: Deploy to Azure Web App
-        id: deploy-to-webapp
-        uses: azure/webapps-deploy@v2
-        with:
-          app-name: 'Dev.Template-WebApi'
-          slot-name: 'Production'
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_9940C4DFF22A4A4697885ACA63DBF9E4 }}
-          package: .
+  #     - name: Deploy to Azure Web App
+  #       id: deploy-to-webapp
+  #       uses: azure/webapps-deploy@v2
+  #       with:
+  #         app-name: 'Dev.Template-WebApi'
+  #         slot-name: 'Production'
+  #         publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_9940C4DFF22A4A4697885ACA63DBF9E4 }}
+  #         package: .
