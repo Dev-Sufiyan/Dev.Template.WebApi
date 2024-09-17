@@ -22,13 +22,13 @@ jobs:
         dotnet-version: 8.0.x
     - name: Restore dependencies
       run: |
-          cd Genie.Counter.WebApi
+          cd Dev.Template.WebApi
           dotnet restore
     - name: Build
       run: |
-          cd Genie.Counter.WebApi
+          cd Dev.Template.WebApi
           dotnet build --no-restore
     - name: Test
       run: |
-          cd Genie.Counter.WebApi
+          cd Dev.Template.WebApi
           dotnet test --no-build --verbosity normal
