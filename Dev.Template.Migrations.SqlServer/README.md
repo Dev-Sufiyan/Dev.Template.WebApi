@@ -1,12 +1,12 @@
-# Entity Framework Migration and Database Update ???
+# Entity Framework Migration and Database Update 🛠️
 
 This document provides instructions for generating EF migrations and updating the database.
 
-## Prerequisites ??
+## Prerequisites ⚙️
 
-Ensure that you are in the `Dev.Template.WebApi` directory before running the commands.
+Ensure that you are in the `Genie.Counter.WebApi` directory before running the commands.
 
-### Connection String Configuration ??
+### Connection String Configuration 🔗
 
 Before running the commands, make sure to set up the connection string in your `appsettings.{environment}.json` based on your environment. Here is an example connection string configuration:
 
@@ -20,22 +20,21 @@ Before running the commands, make sure to set up the connection string in your `
 
 Replace `{Server Name}`, `{DBName}`, `{UserId}`, and `{Pwd}` with your actual SQL Server details.
 
-## Migration Commands ??
+## Migration Commands 🚀
 
-### Generate Migration ??
+### Generate Migration 📝
 
 To create a new EF migration, use the following command:
 
 ```bash
-dotnet ef migrations add V1.0x0 --project ..\Dev.Template.Migrations.SqlServer
+dotnet ef migrations add V1.0x0 --project ..\Genie.Counter.Migrations.SqlServer
 ```
 V1.0x0 is the name of the migration. Replace it with an appropriate name for your migration.
 
-### Update Database ???
+### Update Database 🗃️
 
 To apply the migration to the database, use the following command:
 
 ```bash
-dotnet ef database update --project ..\Dev.Template.Migrations.SqlServer
+dotnet ef database update --project ..\Genie.Counter.Migrations.SqlServer
 ```
-
