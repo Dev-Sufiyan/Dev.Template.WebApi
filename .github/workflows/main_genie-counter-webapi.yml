@@ -1,10 +1,10 @@
 name: Build and deploy to Azure Web App
 
-on:
-  push:
-    branches:
-      - main
-  workflow_dispatch:
+# on:
+#   push:
+#     branches:
+#       - main
+#   workflow_dispatch:
 
 jobs:
   build:
@@ -24,18 +24,18 @@ jobs:
 
       - name: Build with dotnet
         run: |
-          cd Genie.Counter.WebApi
+          cd Dev.Template.WebApi
           dotnet build --configuration Release
 
       - name: dotnet publish
         run: |
-          cd Genie.Counter.WebApi
+          cd Dev.Template.WebApi
           dotnet publish -c Release -o ${{env.DOTNET_ROOT}}/myapp
       
       - name: Apply EF migrations
         env:
           ASPNETCORE_ENVIRONMENT: Production
-        run: dotnet ef database update --project .\Genie.Counter.Migrations.SqlServer --startup-project .\Genie.Counter.WebApi
+        run: dotnet ef database update --project .\Dev.Template.Migrations.SqlServer --startup-project .\Dev.Template.WebApi
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v3
@@ -60,7 +60,7 @@ jobs:
         id: deploy-to-webapp
         uses: azure/webapps-deploy@v2
         with:
-          app-name: 'Genie-Counter-WebApi'
+          app-name: 'Dev.Template-WebApi'
           slot-name: 'Production'
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_9940C4DFF22A4A4697885ACA63DBF9E4 }}
           package: .
