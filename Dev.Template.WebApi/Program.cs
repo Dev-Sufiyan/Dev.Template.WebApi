@@ -5,6 +5,7 @@ using Dev.Template.DBContext;
 using Genesis.Services;
 using Genesis.Controllers.Extension;
 using System.Reflection;
+using Genesis.Controllers.Middleware;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -42,7 +43,8 @@ builder.Services.AddSwaggerGen(c =>
 
 var app = builder.Build();
 
-// Configure middleware
+app.UseMiddleware<ErrorHandlingMiddleware>();
+
 if (app.Environment.IsDevelopment())
 {
     app.UseDeveloperExceptionPage();
