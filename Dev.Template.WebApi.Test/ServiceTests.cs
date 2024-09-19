@@ -1,7 +1,7 @@
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.EntityFrameworkCore;
 using System.Reflection;
-using Dev.Template.DBContext;
+using Dev.Template.Repositories;
 using Genesis.Repositories;
 using Genesis.Controllers.Extension;
 

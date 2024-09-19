@@ -1,8 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 using Genesis.Repositories;
-using Dev.Template.DBContext;
-using Genesis.Services;
+using Dev.Template.Repositories;
 using Genesis.Controllers.Extension;
 using System.Reflection;
 using Genesis.Controllers.Middleware;

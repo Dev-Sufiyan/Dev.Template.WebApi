@@ -1,7 +1,7 @@
 using Genesis.Repositories;
 using Microsoft.EntityFrameworkCore;
 
-namespace Dev.Template.DBContext;
+namespace Dev.Template.Repositories;
 public class AppDbContext : GenDBContext, IDbContext
 {
     public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) { }
